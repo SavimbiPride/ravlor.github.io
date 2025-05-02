@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kartu Hari Ibu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to bottom, #ffe6e6, #ffcccc);
+        }
+        .card {
+            width: 90%;
+            max-width: 400px;
+            height: 90%;
+            max-height: 600px;
+            border: 5px solid #ff9999;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            background-color: white;
+            overflow: hidden;
+            position: relative;
+        }
+        .page {
+            display: none;
+            padding: 20px;
+            text-align: center;
+        }
+        .page.active {
+            display: block;
+        }
+        .nav-buttons {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        .nav-buttons button {
+            padding: 10px 20px;
+            background-color: #ff9999;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .nav-buttons button:disabled {
+            background-color: #ffc1c1;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                height: auto;
+                padding: 20px 0;
+            }
+            .card {
+                width: 95%;
+                height: auto;
+                max-height: none;
+            }
+            .nav-buttons button {
+                font-size: 14px;
+                padding: 8px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="page active" id="page1">
+            <img width="300" height="300" src="img/1.jpeg" alt="Welcome Image">
+            <h1>Selamat Hari Ibu, bunda :3</h1>
+            <p>Hari untuk merayakan cinta dan pengorbanan seorang ibu, yaitu bunda</p>
+        </div>
+        <div class="page" id="page2">
+            <img width="300" height="300" src="img/2.gif" alt="Thank You Image">
+            <h1>Terima Kasih Ibu</h1>
+            <p>Terima kasih atas segala yang telah Ibu lakukan. Dari melahirkan aku, membesarkan aku, membayar aku buat sekolah dan memberi sangu tiap hari :3</p>
+        </div>
+        <div class="page" id="page3">
+            <img width="300" height="300" src="img/3.jpeg" alt="Love Image">
+            <h1>Kasih Sayang dari Hadza</h1>
+            <p>Aku mencintaimu sepenuh hati bunda.</p>
+        </div>
+        <div class="nav-buttons">
+            <button id="prev" disabled>Sebelumnya</button>
+            <button id="next">Selanjutnya</button>
+        </div>
+    </div>
+
+    <script>
+        const pages = document.querySelectorAll('.page');
+        const prevButton = document.getElementById('prev');
+        const nextButton = document.getElementById('next');
+        let currentPage = 0;
+
+        function updatePage() {
+            pages.forEach((page, index) => {
+                page.classList.toggle('active', index === currentPage);
+            });
+            prevButton.disabled = currentPage === 0;
+            nextButton.disabled = currentPage === pages.length - 1;
+        }
+
+        prevButton.addEventListener('click', () => {
+            if (currentPage > 0) currentPage--;
+            updatePage();
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentPage < pages.length - 1) currentPage++;
+            updatePage();
+        });
+
+        updatePage();
+    </script>
+</body>
+</html>

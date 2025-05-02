@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pertanyaan untuk Mama</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom, #ffcccb, #ff9999);
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        .message {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: #d9534f;
+        }
+        p {
+            color: #555;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        #yes {
+            background-color: #28a745;
+            color: white;
+        }
+        #no {
+            background-color: #dc3545;
+            color: white;
+        }
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: white;
+            font-size: 12px;
+            opacity: 0.8;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        <h1>Apakah kamu sayang aku, Mama?</h1>
+        <div class="buttons">
+            <button id="yes" onclick="sayLove()">Iya</button>
+            <button id="no" onclick="growYesButton()">Tidak</button>
+        </div>
+        <p id="response"></p>
+    </div>
+    <script>
+        let noClickCount = 0;
+
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.innerHTML = "&#10052;";
+            document.body.appendChild(snowflake);
+            
+            const startPos = Math.random() * window.innerWidth;
+            const duration = Math.random() * 3 + 2;
+            const size = Math.random() * 10 + 10;
+            
+            snowflake.style.left = `${startPos}px`;
+            snowflake.style.animationDuration = `${duration}s`;
+            snowflake.style.fontSize = `${size}px`;
+            
+            setTimeout(() => {
+                snowflake.remove();
+            }, duration * 1000);
+        }
+        
+        setInterval(createSnowflake, 200);
+        
+        function sayLove() {
+            document.getElementById('response').innerText = "Aku juga sayang, Mama :3 ";
+        }
+        
+        function growYesButton() {
+            let yesButton = document.getElementById('yes');
+            let noButton = document.getElementById('no');
+            let currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
+            yesButton.style.fontSize = (currentSize + 5) + "px";
+            noClickCount++;
+            
+            if (noClickCount >= 10) {
+                noButton.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

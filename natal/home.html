@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merry Christmas!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="navbar">
+        <p>note: sorry if my english bad :3 and if the music volume is loud it can be adjusted, and the music from ost sonic triple trouble 16-bit</p>
+        <button class="nav-button" onclick="showPage(1)">Page 1</button>
+        <button class="nav-button" onclick="showPage(2)">Page 2</button>
+        <button class="nav-button" onclick="showPage(3)">Page 3</button>
+    </div>
+
+    <div id="page1" class="page">
+        <div class="container">
+            <div class="message-box">
+                <h1>merry christmas and new year</h1>
+                <p>merry christmas mommy! and i hope you fine in next years, i want more asmr :3</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="page2" class="page hidden">
+        <div class="container">
+            <div class="message-box">
+                <img src="img/hqdefault.jpeg" alt="FAVORITE">
+                <h1>My favorite</h1>
+                <p>this video, always i play it when want sleep. cause i like your kisses and boop :3</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="page3" class="page hidden">
+        <div class="container">
+            <div class="message-box">
+                <h1>ny reason watch your video</h1>
+                <p>your video and voice make me calm and fast make me sleep</p>
+            </div>
+        </div>
+    </div>
+
+    <canvas id="snowCanvas"></canvas>
+    <audio controls autoplay loop id="backgroundAudio" src ="music.mp3"></audio> 
+    <script src="script.js"></script>
+</body>
+</html>

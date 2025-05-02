@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ucapan untuk Mama</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at bottom, #001d3d, #000814);
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            position: relative;
+        }
+        .message {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            color: #ffdd57;
+        }
+        p {
+            color: #ddd;
+        }
+        .planet {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #ffcc00, #ff8800);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 136, 0, 0.8);
+            top: 20%;
+            left: 70%;
+            animation: rotatePlanet 10s linear infinite;
+        }
+        @keyframes rotatePlanet {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .shooting-star {
+            position: absolute;
+            background: white;
+            width: 15px;
+            height: 3px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px white;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            from {
+                transform: translateY(-10px) translateX(-10px) rotate(-30deg);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(100vh) translateX(100px) rotate(-30deg);
+                opacity: 0;
+            }
+        }
+        .twinkling-star {
+            position: absolute;
+            background: white;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: twinkle 2s infinite alternate;
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            background-color: #ffdd57;
+            color: #000;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        <h1>yo, what's up hommie </h1>
+        <p>greeting card</p>
+        <button onclick="goToPage()" class="button">Just Button</button>
+    </div>
+    <div class="planet"></div>
+    <script>
+        function goToPage() {
+           window.location.href = "index2.html";
+        }
+
+        function createShootingStar() {
+            if (document.querySelectorAll('.shooting-star').length >= 2) return;
+            const star = document.createElement('div');
+            star.classList.add('shooting-star');
+            document.body.appendChild(star);
+            
+            const startX = Math.random() * window.innerWidth * 0.5;
+            const duration = Math.random() * 5 + 3;
+            
+            star.style.left = `${startX}px`;
+            star.style.animationDuration = `${duration}s`;
+            
+            setTimeout(() => {
+                star.remove();
+            }, duration * 1000);
+        }
+        
+        function createTwinklingStar() {
+            const star = document.createElement('div');
+            star.classList.add('twinkling-star');
+            document.body.appendChild(star);
+            
+            const posX = Math.random() * window.innerWidth;
+            const posY = Math.random() * window.innerHeight;
+            
+            star.style.left = `${posX}px`;
+            star.style.top = `${posY}px`;
+            
+            if (Math.random() > 0.5) {
+                star.style.animation = "twinkle 2s infinite alternate";
+            }
+            
+            setTimeout(() => {
+                star.remove();
+            }, 5000);
+        }
+        
+        setInterval(createShootingStar, 3000);
+        setInterval(createTwinklingStar, 800);
+    </script>
+</body>
+</html>

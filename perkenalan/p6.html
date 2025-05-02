@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gw HANDSOME</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom, #5b0908, #ff9999);
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        .message {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: #d9534f;
+        }
+        p {
+            color: #555;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        #yes {
+            background-color: #28a745;
+            color: white;
+        }
+        #no {
+            background-color: #dc3545;
+            color: white;
+        }
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: white;
+            font-size: 12px;
+            opacity: 0.8;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+        .btn {
+        display: block;
+        width: 200px;
+        margin: 20px auto;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: white;
+        background-color: #007BFF;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+    .btn:hover {
+        background-color: #0056b3;
+    }
+    @media (max-width: 768px) {
+            .container {
+                width: 80%;
+                padding: 15px;
+            }
+            .btn {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                width: 90%;
+                padding: 10px;
+            }
+            .btn {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        <h1>Apakah aku handsome?</h1>
+        <div class="buttons">
+            <button id="yes" onclick="sayLove()">Iya</button>
+            <button id="no" onclick="growYesButton()">Tidak</button>
+        </div>
+        <p id="response"></p>
+    </div>
+    <a class="btn" href="p1.html">kembali awal</a>
+    <script>
+        let noClickCount = 0;
+
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.innerHTML = "&#10052;";
+            document.body.appendChild(snowflake);
+            
+            const startPos = Math.random() * window.innerWidth;
+            const duration = Math.random() * 3 + 2;
+            const size = Math.random() * 10 + 10;
+            
+            snowflake.style.left = `${startPos}px`;
+            snowflake.style.animationDuration = `${duration}s`;
+            snowflake.style.fontSize = `${size}px`;
+            
+            setTimeout(() => {
+                snowflake.remove();
+            }, duration * 1000);
+        }
+        
+        setInterval(createSnowflake, 200);
+        
+        function sayLove() {
+            document.getElementById('response').innerText = "makasi :3";
+        }
+        
+        function growYesButton() {
+            let yesButton = document.getElementById('yes');
+            let noButton = document.getElementById('no');
+            let currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
+            yesButton.style.fontSize = (currentSize + 5) + "px";
+            noClickCount++;
+            
+            if (noClickCount >= 10) {
+                noButton.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

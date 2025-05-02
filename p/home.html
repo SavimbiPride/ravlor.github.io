@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merry Christmas!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="navbar">
+        <p>note: itu music nya kegedean jadi kecilkan dulu sebelum di play</p>
+        <button class="nav-button" onclick="showPage(1)">Page 1</button>
+        <button class="nav-button" onclick="showPage(2)">Page 2</button>
+        <button class="nav-button" onclick="showPage(3)">Page 3</button>
+    </div>
+
+    <div id="page1" class="page">
+        <div class="container">
+            <div class="message-box">
+                <h1>merry christmas</h1>
+                <p>merry christmas priska :3</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="page2" class="page hidden">
+        <div class="container">
+            <div class="message-box">
+                <h1>my wish</h1>
+                <p>semoga tahun depan kita semua baik baik saja dan hubungan sebagai teman dekat ya :3</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="page3" class="page hidden">
+        <div class="container">
+            <div class="message-box">
+                <img src="img/Party Like Michael Scott This Year_ Best Quotes From The Office Christmas Episodes.jpeg" width="350" height="350">
+                <h1>new year 2025</h1>
+                <p>yeeeeeeeeaaaaaaaaaaaaaayyyyyyyyyyyyyyyyyyy</p>
+            </div>
+        </div>
+    </div>
+
+    <canvas id="snowCanvas"></canvas>
+    <audio controls autoplay loop id="backgroundAudio" src ="videoplayback (1)-new.mp3"></audio> 
+    <script src="script.js"></script>
+</body>
+</html>
