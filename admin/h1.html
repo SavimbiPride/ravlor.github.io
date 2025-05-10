@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/jpeg" href="image/icon.jpeg" />
-  <title>Happy birthday Ravkidul :3</title>
+  <link rel="icon" type="image/jpeg" href="image/download-removebg-preview.png" />
+  <title>Happy birthday RelaEXE :3</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -12,43 +12,60 @@
       padding: 20px;
       background-image: url('image/back.jpg');
       background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
       color: #333;
     }
 
     .container {
-      max-width: 600px;
+      max-width: 650px;
       margin: 0 auto;
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(112, 109, 109, 0.7);;
       padding: 20px;
       border-radius: 12px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       text-align: center;
     }
 
-    h3 {
-      color: #e91e63;
-      margin-top: 20px;
+    h1 {
+      text-align: center;
+      color: #c03966;
     }
 
+    .ucapan {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    
     .gif {
       display: block;
-      margin: 0 auto 20px;
+      margin: 20px auto 0;
       max-width: 100%;
       height: auto;
       border-radius: 8px;
     }
 
-    audio {
-      margin-top: 10px;
-      width: 100%;
-      max-width: 400px;
-    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 15px;
+      }
 
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .ucapan {
+        font-size: 1rem;
+        flex-direction: row;
+      }
+
+      .ucapan img {
+        width: 30px;
+      }
+    }
     a {
       display: inline-block;
-      margin-top: 20px;
+      margin-top: 10px;
       padding: 8px 16px;
       background-color: #e91e63;
       color: white;
@@ -62,32 +79,14 @@
     a:hover {
       background-color: #c2185b;
     }
-
-    @media (max-width: 600px) {
-      .container {
-        padding: 15px;
-      }
-
-      h3 {
-        font-size: 1.2rem;
-      }
-
-      audio {
-        width: 100%;
-      }
-    }
   </style>
 </head>
 <body>
   <div class="container">
-    <img src="image/download.gif" alt="GIF Ucapan" class="gif" />
-    <h3>never be alone</h3>
-    <audio controls>
-      <source src="image/Never Be Alone (FNAF4 Song) - Shadrow-new.mp3" type="audio/mp3" />
-      Browser Anda tidak mendukung pemutaran audio.
-    </audio>
-    <br />
-    <a href="h1.html">RESTart</a>
+    <h1>Happy birthday </h1>
+    <p class="ucapan">Semoga panjang umur, sehat selalu, dan bahagia selalu from "Ravlor the sigma one :3"</p>
+    <img src="image/spongebob.gif" alt="GIF Ucapan" class="gif">
+    <a href="h2.html">next</a>
   </div>
 </body>
 </html>

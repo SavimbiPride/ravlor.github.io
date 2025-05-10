@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/jpeg" href="image/icon.jpeg" />
-  <title>Happy birthday Ravkidul :3</title>
+  <link rel="icon" type="image/jpeg" href="image/download-removebg-preview.png" />
+  <title>Happy birthday RelaEXE :3</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -12,13 +12,15 @@
       padding: 20px;
       background-image: url('image/back.jpg');
       background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       color: #333;
     }
 
     .container {
       max-width: 600px;
       margin: 0 auto;
-      background: rgba(255, 255, 255, 0.7);;
+      background: rgba(112, 109, 109, 0.7);;
       padding: 20px;
       border-radius: 12px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -36,17 +38,33 @@
       gap: 10px;
     }
 
-    .ucapan img {
-      width: 60px;
-      height: auto;
+    video {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 10px;
     }
 
-    .gif {
-      display: block;
-      margin: 20px auto 0;
-      max-width: 100%;
-      height: auto;
-      border-radius: 8px;
+    .note {
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+      color: #555;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 16px;
+      background-color: #e91e63;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+      cursor: pointer;
+    }
+
+    a:hover {
+      background-color: #c2185b;
     }
 
     @media (max-width: 600px) {
@@ -67,31 +85,18 @@
         width: 30px;
       }
     }
-    a {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 8px 16px;
-      background-color: #e91e63;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
-      transition: background-color 0.3s;
-      cursor: pointer;
-    }
-
-    a:hover {
-      background-color: #c2185b;
-    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Happy birthday my BELOVED dopelganger</h1>
-    <p class="ucapan">Semoga panjang umur, sehat selalu, dan bahagia selalu. dan berikan aku<img src="image/rot.jpeg" alt="roti">
-    </p>
-    <img src="image/spongebob.gif" alt="GIF Ucapan" class="gif">
-    <a href="h2.html">next</a>
+    <video controls>
+      <source src="image/Sequence 01_1.mp4" type="video/mp4" />
+      Browser Anda tidak mendukung pemutaran video.
+    </video>
+
+    <p class="note"><strong>Note: Sebelum diputar, atur volume-nya.</strong></p>
+
+    <a href="h3.html">Next</a>
   </div>
 </body>
 </html>
