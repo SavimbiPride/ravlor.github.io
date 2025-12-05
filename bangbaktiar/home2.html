@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hihihihhahahaha</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #222;
+            font-family: serif;
+        }
+
+        .card {
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(90deg, #d61408, #f04e1a);
+            border-radius: 20px;
+            border: 10px solid #000;
+            box-shadow: 0 0 10px #000 inset;
+            position: relative;
+            overflow: hidden;
+            transform: translateX(100vw);
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100vw);
+            }
+
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideOutLeft {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateX(-100vw);
+                opacity: 0;
+            }
+        }
+
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateX(100vw);
+                opacity: 0;
+            }
+        }
+
+        .animate-in {
+            animation: slideInRight 0.5s forwards;
+        }
+
+        .animate-out-left {
+            animation: slideOutLeft 0.5s forwards;
+        }
+
+        .animate-out-right {
+            animation: slideOutRight 0.5s forwards;
+        }
+
+        .content-text {
+            color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-size: 45px;
+            font-weight: bold;
+            line-height: 1.5em;
+            width: 90%;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-btn {
+            width: 70px;
+            height: 70px;
+            background: #888;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 35px;
+            cursor: pointer;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="mainCard" class="card">
+        <div class="inner-border"></div>
+
+        <div class="content-text">
+            untuk bang baktiar, saya mirza yang sigma dan ganteng dan yang bisa koding (mungkin) <br>
+            sangat terima kasih untuk materi selama satu tahun nya, saya sangat berdampak untuk itu <br>
+            dan semoga bang baktiar selalu sehat dan ingat saia :3 <br><br>
+
+            sayo nara my friend
+        </div>
+
+        <div class="nav">
+            <div id="prev" class="nav-btn">←</div>
+            <div id="next" class="nav-btn">→</div>
+        </div>
+
+    </div>
+
+    <script>
+        const ANIMATION_DURATION = 500;
+        const cardElement = document.getElementById('mainCard');
+
+        window.onload = function () {
+            cardElement.classList.add('animate-in');
+        }
+
+        document.getElementById('prev').addEventListener('click', function () {
+            cardElement.classList.remove('animate-in'); // Hapus in case masih berjalan
+            cardElement.classList.add('animate-out-right');
+
+            setTimeout(function () {
+                window.location.href = 'home1.html';
+            }, ANIMATION_DURATION);
+        });
+
+        document.getElementById('next').addEventListener('click', function () {
+            cardElement.classList.remove('animate-in');
+            cardElement.classList.add('animate-out-left');
+
+            setTimeout(function () {
+                window.location.href = 'home3.html';
+            }, ANIMATION_DURATION);
+        });
+    </script>
+</body>
+
+</html>

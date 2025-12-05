@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kartu ucapan halaman 3</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #222;
+            font-family: sans-serif;
+        }
+
+        .card {
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(90deg, #d61408, #f04e1a);
+            border: 10px solid #000;
+            position: relative;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .content-box {
+            position: absolute;
+            width: 50%;
+            height: 60%;
+            bottom: 5%;
+            left: 50%;
+            transform: translate(-50%, 0);
+            background: #6b675e;
+        }
+
+        .content-box::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 20px;
+            background: linear-gradient(90deg, #6b675e 0%, #4a4842 100%);
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            box-shadow: inset 3px 0 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .screen {
+            position: absolute;
+            width: 55%;
+            height: 70%;
+            background: #4a4842;
+            top: 50%;
+            left: 5%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0 10px;
+        }
+
+        .vertical-line {
+            width: 3px;
+            height: 90%;
+            background-color: #141414;
+        }
+
+        .btn-triangle {
+            position: absolute;
+            width: 0;
+            height: 0;
+            cursor: pointer;
+        }
+
+        .volume-up {
+            right: 10%;
+            top: 10%;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-bottom: 26px solid #888;
+        }
+
+        .volume-down {
+            right: 10%;
+            top: 20%;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 26px solid #888;
+        }
+
+        .next-btn {
+            right: 10%;
+            top: 35%;
+            border-top: 18px solid transparent;
+            border-bottom: 18px solid transparent;
+            border-left: 28px solid #888;
+        }
+
+        .prev-btn {
+            right: 18%;
+            top: 35%;
+            border-top: 18px solid transparent;
+            border-bottom: 18px solid transparent;
+            border-right: 28px solid #888;
+        }
+
+
+        .detail-circle {
+            position: absolute;
+            width: 10%;
+            height: 20%;
+            background: #888;
+            right: 10%;
+            bottom: 5%;
+            border-radius: 100%;
+            cursor: pointer;
+        }
+
+        .left-cylinder {
+            position: absolute;
+            width: 80px;
+            height: 300px;
+            background-color: #6b675e;
+            top: 50%;
+            left: -100px;
+            transform: translateY(-50%);
+            border-radius: 10px;
+        }
+
+        .pipe-top {
+            position: absolute;
+            width: 110px;
+            height: 20px;
+            background-color: #6b675e;
+            top: 30px;
+            left: -100px;
+        }
+
+        .pipe-bottom {
+            position: absolute;
+            width: 110px;
+            height: 20px;
+            background-color: #6b675e;
+            bottom: 30px;
+            left: -100px;
+        }
+
+        .antenna {
+            position: absolute;
+            width: 5px;
+            height: 510px;
+            background: #ccc;
+            left: 70%;
+            top: 10%;
+            transform: rotate(0deg);
+            transform-origin: bottom center;
+            border-radius: 5px;
+        }
+
+        .teks {
+            position: absolute;
+            top: 5%;
+            left: 5%;
+            width: 40%;
+            font-size: 26px;
+            line-height: 1.4;
+            color: #fff;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        .info {
+            position: absolute;
+            top: 23%;
+            left: 5%;
+            width: 40%;
+            font-size: 18px;
+            color: #fff;
+            opacity: 0.85;
+            font-style: italic;
+            text-shadow: 2px 2px 3px #000;
+        }
+
+        #songTitle {
+            position: absolute;
+            top: 3%;
+            right: 3%;
+            font-size: 22px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 2px 2px 4px #000;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 6px 12px;
+            border-radius: 8px;
+        }
+
+        #btnPlay {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 45px;
+            color: #000;
+        }
+
+        .music-note {
+            position: absolute;
+            font-size: 35px;
+            color: #fff;
+            opacity: 0.9;
+            animation: floatUp 2s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            30% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-40px);
+                opacity: 0;
+            }
+        }
+
+
+        .nav {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-btn {
+            width: 70px;
+            height: 70px;
+            background: #888;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 35px;
+            cursor: pointer;
+            user-select: none;
+            border: none;
+        }
+    </style>
+
+<body>
+
+    <div class="card" id="mainCard">
+        <div id="songTitle"></div>
+        <div class="teks">
+            list lagu dari anime girls last tour: <br>
+            1. Owari no Uta <br>
+            2. song of rain drops
+        </div>
+
+        <div class="info">
+            (btw ini radio nya dari anime atas :3)
+        </div>
+        <div class="inner-border"></div>
+
+        <div class="antenna"></div>
+
+        <div class="content-box">
+            <div class="screen" id="screenBox">
+                <div class="vertical-line"></div>
+                <div class="vertical-line"></div>
+                <div class="vertical-line"></div>
+                <div class="vertical-line"></div>
+                <div class="vertical-line"></div>
+                <div class="vertical-line"></div>
+            </div>
+
+            <div class="btn-triangle next-btn"></div>
+            <div class="btn-triangle prev-btn"></div>
+            
+            <div class="btn-triangle volume-up"></div>
+            <div class="btn-triangle volume-down"></div>
+
+            <div class="detail-circle" id="btnPlay">►</div>
+
+            <div class="left-cylinder"></div>
+            <div class="pipe-top"></div>
+            <div class="pipe-bottom"></div>
+        </div>
+
+        <div class="nav">
+            <div id="prev" class="nav-btn">←</div>
+            <div id="next" class="nav-btn">→</div>
+        </div>
+    </div>
+
+
+    <script>
+        //list audio
+
+
+        const songTitles = [
+            "Owari no Uta",
+            "Song of Rain Drops"
+        ];
+
+        const playlist = [
+            "image/1.mp3",
+            "image/2.mp3"
+        ];
+
+        let currentIndex = 0;
+        let audio = new Audio(playlist[currentIndex]);
+        let currentVolume = 0.5;
+        audio.volume = currentVolume;
+
+        // PLAY / PAUSE
+        const btnPlay = document.getElementById("btnPlay");
+
+        btnPlay.addEventListener("click", () => {
+            if (audio.paused) {
+                audio.play();
+                btnPlay.textContent = "❚❚";
+                startNotes();
+            } else {
+                audio.pause();
+                btnPlay.textContent = "►";
+                stopNotes();
+            }
+        });
+
+        // Update ikon jika lagu otomatis berpindah (next/prev)
+        audio.addEventListener("play", () => {
+            btnPlay.textContent = "❚❚";
+            startNotes();
+        });
+
+        audio.addEventListener("pause", () => {
+            btnPlay.textContent = "►";
+            stopNotes();
+        });
+
+
+        const screenBox = document.getElementById("screenBox");
+        let noteInterval = null;
+
+        // mulai effect
+        function startNotes() {
+            if (noteInterval) return;
+
+            noteInterval = setInterval(() => {
+                const note = document.createElement("div");
+                note.className = "music-note";
+
+                const notes = ["♪", "♫", "♬"];
+                note.textContent = notes[Math.floor(Math.random() * notes.length)];
+
+
+                note.style.left = (10 + Math.random() * 70) + "%";
+                note.style.bottom = "150px";
+
+                screenBox.appendChild(note);
+
+
+                setTimeout(() => {
+                    note.remove();
+                }, 2000);
+
+            }, 400);
+        }
+
+        // stop effect
+        function stopNotes() {
+            clearInterval(noteInterval);
+            noteInterval = null;
+
+            document.querySelectorAll(".music-note").forEach(n => n.remove());
+        }
+
+        // VOLUME
+        document.querySelector(".volume-up").addEventListener("click", () => {
+            currentVolume += 0.1;
+            if (currentVolume > 1) currentVolume = 1;
+            audio.volume = currentVolume;
+        });
+
+        document.querySelector(".volume-down").addEventListener("click", () => {
+            currentVolume -= 0.1;
+            if (currentVolume < 0) currentVolume = 0;
+            audio.volume = currentVolume;
+        });
+
+        function updateSongTitle() {
+            document.getElementById("songTitle").textContent = songTitles[currentIndex];
+        }
+        updateSongTitle();
+
+        // NEXT
+        document.querySelector(".next-btn").addEventListener("click", () => {
+            currentIndex = (currentIndex + 1) % playlist.length;
+            audio.pause();
+            audio = new Audio(playlist[currentIndex]);
+            audio.volume = currentVolume;
+            audio.play();
+            updateSongTitle();
+        });
+
+        // PREV
+        document.querySelector(".prev-btn").addEventListener("click", () => {
+            currentIndex = (currentIndex - 1 + playlist.length) % playlist.length;
+            audio.pause();
+            audio = new Audio(playlist[currentIndex]);
+            audio.volume = currentVolume;
+            audio.play();
+            updateSongTitle();
+        });
+
+        // NAV
+        const ANIMATION_DURATION = 500;
+        const cardElement = document.getElementById('mainCard');
+
+        window.onload = function () {
+            cardElement.classList.add('animate-in');
+        }
+
+        document.getElementById('prev').addEventListener('click', function () {
+            cardElement.classList.remove('animate-in');
+            cardElement.classList.add('animate-out-right');
+
+            setTimeout(function () {
+                window.location.href = 'home4.html';
+            }, ANIMATION_DURATION);
+        });
+
+        document.getElementById('next').addEventListener('click', function () {
+            alert("ini halaman terakhir, tapi didunia nyata tidak akan berakhir :3");
+        });
+    </script>
+</body>
+
+</html>

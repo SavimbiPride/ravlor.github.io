@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jaket bang baktiar dulu</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #222;
+            font-family: serif;
+        }
+
+        .card {
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(90deg, #d61408, #f04e1a);
+            border-radius: 20px;
+            border: 10px solid #000;
+            box-shadow: 0 0 10px #000 inset;
+            position: relative;
+            overflow: hidden;
+            transform: translateX(100vw);
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100vw);
+            }
+
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideOutLeft {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateX(-100vw);
+                opacity: 0;
+            }
+        }
+
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateX(100vw);
+                opacity: 0;
+            }
+        }
+
+        .animate-in {
+            animation: slideInRight 0.5s forwards;
+        }
+
+        .animate-out-left {
+            animation: slideOutLeft 0.5s forwards;
+        }
+
+        .animate-out-right {
+            animation: slideOutRight 0.5s forwards;
+        }
+
+        .img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .img img {
+            width: 200px;
+            border: 2px solid #000;
+            border-radius: 10px;
+        }
+
+        .imgpojok {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .imgpojok img {
+            width: 120px;
+            opacity: 0.85;
+        }
+
+        .nav {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-btn {
+            width: 70px;
+            height: 70px;
+            background: #888;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 35px;
+            cursor: pointer;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="mainCard" class="card">
+
+        <div class="img">
+            <img src="image/jaket bang baktiar.png">
+        </div>
+
+        <div class="imgpojok">
+            <img src="image/copyright.png">
+        </div>
+
+        <div class="nav">
+            <div id="prev" class="nav-btn">←</div>
+            <div id="next" class="nav-btn">→</div>
+        </div>
+
+    </div>
+
+    <script>
+        const ANIMATION_DURATION = 500;
+        const cardElement = document.getElementById('mainCard');
+
+        window.onload = function () {
+            cardElement.classList.add('animate-in');
+        }
+
+        document.getElementById('prev').addEventListener('click', function () {
+            cardElement.classList.remove('animate-in');
+            cardElement.classList.add('animate-out-right');
+
+            setTimeout(function () {
+                window.location.href = 'home3.html';
+            }, ANIMATION_DURATION);
+        });
+
+        document.getElementById('next').addEventListener('click', function () {
+            cardElement.classList.remove('animate-in');
+            cardElement.classList.add('animate-out-left');
+
+            setTimeout(function () {
+                window.location.href = 'home5.html';
+            }, ANIMATION_DURATION);
+        });
+    </script>
+
+</body>
+</html>
