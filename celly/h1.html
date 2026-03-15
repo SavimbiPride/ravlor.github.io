@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>miaw :3</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barrio&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Barrio", cursive;
+      }
+
+      body {
+        min-height: 100vh;
+
+        background-image: url("img/background.jpeg");
+        background-size: cover;
+        background-position: center;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        padding: 40px;
+
+        transition:
+          opacity 0.5s,
+          transform 0.5s;
+      }
+
+      h1 {
+        font-size: 50px;
+        margin-bottom: 60px;
+        text-align: center;
+      }
+
+      .content {
+        display: flex;
+        align-items: center;
+        gap: 80px;
+      }
+
+      .buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+
+        width: 220px;
+      }
+
+      button {
+        background: #2e3f8f;
+        color: white;
+
+        border: none;
+
+        padding: 15px;
+
+        font-size: 20px;
+
+        border-radius: 14px;
+
+        cursor: pointer;
+
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        transition: 0.25s;
+      }
+
+      button:hover {
+        transform: scale(1.08);
+        background: #1d2c6b;
+      }
+
+      .character img {
+        width: 360px;
+      }
+
+      .fade-out {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 40px;
+        }
+
+        .content {
+          flex-direction: column;
+          gap: 30px;
+        }
+
+        .buttons {
+          width: 100%;
+          align-items: center;
+        }
+
+        button {
+          width: 80%;
+          justify-content: center;
+        }
+
+        .character img {
+          width: 200px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>hai :3</h1>
+
+    <div class="content">
+      <div class="buttons">
+        <button onclick="goPage('h2.html')">
+          <i class="fa-solid fa-note-sticky"></i>
+          note
+        </button>
+
+        <button onclick="goPage('h3.html')">
+          <i class="fa-solid fa-video"></i>
+          video
+        </button>
+      </div>
+
+      <div class="character">
+        <img src="img/horey.png" />
+      </div>
+    </div>
+
+    <script>
+      function goPage(page) {
+        document.body.classList.add("fade-out");
+
+        setTimeout(() => {
+          window.location.href = page;
+        }, 400);
+      }
+    </script>
+  </body>
+</html>
