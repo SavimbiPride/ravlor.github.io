@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman 2 - Happy Birthday</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #ff4d8d;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: white;
+        }
+
+        /* Card Utama */
+        #mainCard {
+            text-align: center;
+            padding: 20px;
+            transition: all 0.5s ease-in-out;
+            animation: fadeIn 1s ease-out;
+            z-index: 10; /* Agar di atas konfeti jika perlu */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .slide-out {
+            animation: slideOut 0.5s forwards ease-in-out;
+        }
+
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(-120%); opacity: 0; }
+        }
+
+        /* Styling Gambar dengan Border */
+        .birthday-img {
+            width: 100%;
+            max-width: 400px;
+            border: 8px solid #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 40px;
+        }
+
+        /* Tombol Next */
+        .btn-next {
+            background-color: #ffb3d1;
+            color: #ff4d8d;
+            border: none;
+            padding: 15px 100px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-transform: lowercase;
+            display: inline-block;
+        }
+
+        .btn-next:hover {
+            background-color: #ffffff;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="mainCard">
+        <img src="img/uwa.jpeg" alt="Happy Birthday" class="birthday-img">
+        <h1>SELAMAT ULANG TAHUN!</h1>
+        <h1>semoga sehat selalu ya shiny :3</h1>
+        <h6>umur lu 20 (19) wokaowkokaokwokkaokokw</h6>
+        <br>
+        
+        <button id="next" class="btn-next">next</button>
+    </div>
+
+    <script>
+        window.onload = function() {
+            var duration = 3 * 1000;
+            var end = Date.now() + duration;
+
+            (function frame() {
+                confetti({
+                    particleCount: 3,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: ['#ffffff', '#ffb3d1', '#ffecf2']
+                });
+                confetti({
+                    particleCount: 3,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: ['#ffffff', '#ffb3d1', '#ffecf2']
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ffffff', '#ffb3d1', '#ff4d8d']
+            });
+        };
+
+        document.getElementById('next').addEventListener('click', function () {
+            const cardElement = document.getElementById('mainCard');
+            cardElement.classList.add('slide-out');
+            setTimeout(function () {
+                window.location.href = 'h3.html'; 
+            }, 500);
+        });
+    </script>
+</body>
+</html>

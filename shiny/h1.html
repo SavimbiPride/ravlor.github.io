@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesuatu Untukmu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Reset Dasar */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #ff4d8d;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: white;
+        }
+
+        /* Container Utama */
+        .container {
+            text-align: center;
+            padding: 20px;
+            animation: fadeIn 1.5s ease-in-out;
+            transition: all 0.5s ease-in-out; /* Untuk transisi halus */
+        }
+
+        /* Animasi Muncul */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- PERBAIKAN: Animasi Slide Out --- */
+        .slide-out {
+            animation: slideOut 0.5s forwards ease-in-out;
+        }
+
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(-120%); opacity: 0; }
+        }
+
+        /* Teks Utama */
+        h1 {
+            font-weight: 300;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            margin-bottom: 50px;
+            opacity: 0.9;
+        }
+
+        /* Tombol 'Next' */
+        .btn-next {
+            background-color: #ffb3d1;
+            color: #ff4d8d;
+            border: none;
+            padding: 15px 80px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-transform: lowercase;
+        }
+
+        .btn-next:hover {
+            background-color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        .btn-next:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="mainCard">
+        <h1>hey i have something for you</h1>
+        <button class="btn-next" id="next">next</button>
+    </div>
+
+    <script>
+        document.getElementById('next').addEventListener('click', function () {
+            const cardElement = document.getElementById('mainCard');
+            cardElement.classList.add('slide-out');
+            setTimeout(function () {
+                window.location.href = 'h2.html'; 
+            }, 500);
+        });
+    </script>
+</body>
+</html>

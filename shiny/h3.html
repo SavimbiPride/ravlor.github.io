@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Radio UI - Final Version</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: #ff4d8d;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        overflow: hidden;
+      }
+
+      #mainCard {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+      }
+
+      /* RADIO CONTAINER */
+      .radio-container {
+        position: relative;
+        width: 580px;
+        height: 380px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+      }
+
+      /* ANTENA */
+      .antenna {
+        position: absolute;
+        width: 12px;
+        height: 180px;
+        background: #333;
+        top: 0px; /* Merapat ke body */
+        left: 100px;
+        transform: rotate(-35deg);
+        transform-origin: bottom;
+        border-radius: 10px;
+        z-index: 1;
+        animation: wobble 3s infinite ease-in-out;
+      }
+
+      @keyframes wobble {
+        0%, 100% { transform: rotate(-35deg); }
+        50% { transform: rotate(-40deg); }
+      }
+
+      /* BODY RADIO */
+      .radio-body {
+        position: relative;
+        width: 560px;
+        height: 280px;
+        background: #81d4fa;
+        border-radius: 20px;
+        border-top-right-radius: 140px;
+        display: flex;
+        align-items: center;
+        padding: 0 40px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        z-index: 2;
+      }
+
+      /* DISPLAY */
+      .radio-display {
+        width: 240px;
+        height: 160px;
+        background: #fff59d;
+        border-radius: 12px;
+        margin-left: auto;
+        padding: 15px;
+        font-size: 13px;
+        color: #333;
+        overflow-y: auto;
+        box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+        border: 4px solid #f9e79f;
+      }
+
+      .station {
+        cursor: pointer;
+        padding: 5px 0;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+      }
+
+      .station.active {
+        font-weight: 600;
+        color: #ff4d8d;
+      }
+
+      /* CONTROLS (GRID LAYOUT) */
+      .controls {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+
+      .btn {
+        width: 50px;
+        height: 50px;
+        background: #5aa9e6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        font-size: 20px;
+        cursor: pointer;
+        transition: 0.2s;
+        box-shadow: 0 4px 0 #3a8cc9;
+      }
+
+      .btn:active {
+        transform: translateY(3px);
+        box-shadow: 0 1px 0 #3a8cc9;
+      }
+
+      /* DIAL POWER */
+      .dial {
+        position: absolute;
+        bottom: 100px;
+        left: 170px;
+        width: 85px;
+        height: 85px;
+        background: #222;
+        border-radius: 50%;
+        border: 6px solid #444;
+        cursor: pointer;
+        transition: 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      }
+
+      .dial::after {
+        content: "";
+        width: 10px;
+        height: 10px;
+        background: #555;
+        border-radius: 50%;
+        transition: 0.3s;
+      }
+
+      .dial.active {
+        border-color: #4caf50;
+      }
+
+      .dial.active::after {
+        background: #4caf50;
+        box-shadow: 0 0 10px #4caf50;
+      }
+
+      /* RESET BUTTON */
+      .btn-reset {
+        background-color: #ffb3d1;
+        color: #ff4d8d;
+        border: none;
+        padding: 15px 100px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: 0.3s;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        text-transform: lowercase;
+      }
+
+      .btn-reset:hover {
+        background-color: #ffffff;
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="mainCard">
+      <div class="radio-container">
+        <div class="antenna"></div>
+
+        <div class="radio-body">
+          <div class="controls">
+            <div class="btn" id="prev">⏮️</div>
+            <div class="btn" id="volUp">🔼</div>
+            <div class="btn" id="volDown">🔽</div>
+            <div class="btn" id="next">⏭️</div>
+          </div>
+          
+          <div class="dial" title="Power ON/OFF"></div>
+
+          <div class="radio-display" id="display"></div>
+        </div>
+      </div>
+
+      <button id="resetBtn" class="btn-reset">reset</button>
+    </div>
+
+    <audio id="audio"></audio>
+
+    <script>
+      let isOn = false;
+      let volume = 0.5;
+      let current = 0;
+
+      const dial = document.querySelector(".dial");
+      const display = document.getElementById("display");
+      const audio = document.getElementById("audio");
+
+      const volUp = document.getElementById("volUp");
+      const volDown = document.getElementById("volDown");
+      const nextBtn = document.getElementById("next");
+      const prevBtn = document.getElementById("prev");
+
+      const stations = [
+        "img/uwa.mp3",
+        "img/magical.mp3"
+      ];
+
+      function loadStation() {
+        audio.src = stations[current];
+        audio.volume = volume;
+      }
+
+      function render() {
+        if (!isOn) {
+          display.innerHTML = "<p style='text-align:center;margin-top:55px;font-weight:bold;color:rgba(0,0,0,0.3)'>OFF</p>";
+          return;
+        }
+
+        display.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+             <b style="color:#ff4d8d">ON</b>
+             <small>Vol: ${Math.round(volume * 100)}%</small>
+          </div>
+          <hr style="margin:8px 0; border:0; border-top:1px solid #ddd">
+          ${stations.map((s, i) => `
+            <div class="station ${i === current ? "active" : ""}" onclick="play(${i})">
+              ${i === current ? "⚡" : "•"} ${s.replace('img/', '')}
+            </div>
+          `).join("")}
+        `;
+      }
+
+      window.play = function (i) {
+        if(!isOn) return;
+        current = i;
+        loadStation();
+        audio.play();
+        render();
+      };
+
+      dial.onclick = () => {
+        isOn = !isOn;
+        dial.classList.toggle("active");
+
+        if (isOn) {
+          loadStation();
+          audio.play();
+        } else {
+          audio.pause();
+        }
+        render();
+      };
+
+      volUp.onclick = () => {
+        if (!isOn) return;
+        volume = Math.min(volume + 0.1, 1);
+        audio.volume = volume;
+        render();
+      };
+
+      volDown.onclick = () => {
+        if (!isOn) return;
+        volume = Math.max(volume - 0.1, 0);
+        audio.volume = volume;
+        render();
+      };
+
+      function nextSong() {
+        current = (current + 1) % stations.length;
+        loadStation();
+        audio.play();
+        render();
+      }
+
+      function prevSong() {
+        current = (current - 1 + stations.length) % stations.length;
+        loadStation();
+        audio.play();
+        render();
+      }
+
+      nextBtn.onclick = () => isOn && nextSong();
+      prevBtn.onclick = () => isOn && prevSong();
+
+      audio.onended = nextSong;
+
+      document.getElementById("resetBtn").onclick = () => {
+        setTimeout(() => (window.location.href = "h1.html"), 200);
+      };
+
+      render();
+    </script>
+  </body>
+</html>
