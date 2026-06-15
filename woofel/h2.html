@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barrio&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Barrio', cursive;
+
+            background: url('img/background.jpeg');
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: white;
+        }
+
+        #mainCard {
+            text-align: center;
+            padding: 20px;
+            transition: all 0.5s ease-in-out;
+            animation: fadeIn 1s ease-out;
+            z-index: 10;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .slide-out {
+            animation: slideOut 0.5s forwards ease-in-out;
+        }
+
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(-120%); opacity: 0; }
+        }
+
+        .birthday-img {
+            width: 100%;
+            max-width: 350px;
+
+            border: 4px solid #ffffff;
+            border-radius: 20px;
+
+            filter: grayscale(20%);
+
+            box-shadow:
+                0 0 25px rgba(255,255,255,0.15);
+
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            letter-spacing: 2px;
+            color: #000000;
+
+            margin-bottom: 10px;
+        }
+
+        h6 {
+            color: #000000;
+            font-size: 1rem;
+            font-weight: normal;
+            margin-top: 10px;
+        }
+
+        .btn-next {
+            background: #d9d9d9;
+            color: #000000;
+
+            border: 2px solid #ffffff;
+            border-radius: 50px;
+
+            padding: 15px 100px;
+
+            font-family: 'Barrio', cursive;
+            font-size: 1.1rem;
+
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            box-shadow:
+                0 0 20px rgba(255,255,255,0.15);
+        }
+
+        .btn-next:hover {
+            background: #444444;
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="mainCard">
+        <img src="img/Post from BlenTouad.jpeg" alt="Happy Birthday" class="birthday-img">
+        <h1>happy birthday woofle :3</h1>
+        <h1>i hope u have always great day!</h1>
+        <h6>i think ur age is 16 <img src="" alt=""></h6>
+        <br>
+        
+        <button id="next" class="btn-next">next</button>
+    </div>
+
+    <script>
+        window.onload = function() {
+            var duration = 3 * 1000;
+            var end = Date.now() + duration;
+
+            (function frame() {
+                confetti({
+                    particleCount: 3,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: ['#ffffff', '#888888', '#000000']
+                });
+                confetti({
+                    particleCount: 3,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: ['#ffffff', '#888888', '#000000']
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ffffff', '#888888', '#000000']
+            });
+        };
+
+        document.getElementById('next').addEventListener('click', function () {
+            const cardElement = document.getElementById('mainCard');
+            cardElement.classList.add('slide-out');
+            setTimeout(function () {
+                window.location.href = 'h3.html'; 
+            }, 500);
+        });
+    </script>
+</body>
+</html>

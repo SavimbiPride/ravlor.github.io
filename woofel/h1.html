@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>here</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barrio&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Barrio', cursive;
+
+            background: url('img/background.jpeg');
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: white;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            animation: fadeIn 1.5s ease-in-out;
+            transition: all 0.5s ease-in-out;
+        }
+
+        h1 {
+            font-size: 2rem;
+            letter-spacing: 2px;
+            margin-bottom: 50px;
+            color: #000000;
+        }
+
+        .btn-next {
+            background: #d9d9d9;
+            color: #000000;
+
+            border: 2px solid #ffffff;
+            border-radius: 50px;
+
+            padding: 15px 80px;
+
+            font-family: 'Barrio', cursive;
+            font-size: 1.2rem;
+
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            box-shadow: 0 0 20px rgba(255,255,255,0.15);
+        }
+
+        .btn-next:hover {
+            background: #444444;
+            color: #ffffff;
+            border-color: #d9d9d9;
+
+            transform: scale(1.05);
+        }
+
+        .btn-next:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="mainCard">
+        <h1>hey i have something for you</h1>
+        <button class="btn-next" id="next">next</button>
+    </div>
+
+    <script>
+        document.getElementById('next').addEventListener('click', function () {
+            const cardElement = document.getElementById('mainCard');
+            cardElement.classList.add('slide-out');
+            setTimeout(function () {
+                window.location.href = 'h2.html'; 
+            }, 500);
+        });
+    </script>
+</body>
+</html>
