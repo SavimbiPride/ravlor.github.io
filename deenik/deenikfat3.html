@@ -259,14 +259,15 @@
     </main>
 
     <script>
-        // --- EFEK PARTY POPPER (CONFETTI) ---
+        // --- EFEK PARTY POPPER (HITAM, ABU-ABU, PUTIH) ---
         const canvas = document.getElementById("confettiCanvas");
         const ctx = canvas.getContext("2d");
         const paper = document.getElementById("paper");
         const partyImg = document.getElementById("partyImg");
 
         let particles = [];
-        const colors = ["#ff595e", "#ffca3a", "#8ac926", "#1982c4", "#6a4c93", "#d47d89", "#70c7ef"];
+        // Palet warna yang diminta: Hitam, Abu-abu, Putih
+        const colors = ["#1f1f1f", "#403747", "#8a868d", "#b0b0b0", "#e0e0e0", "#ffffff"];
 
         function resizeCanvas() {
             canvas.width = paper.clientWidth;
