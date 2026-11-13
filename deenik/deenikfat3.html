@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday deenik</title>
+
+    <style>
+        @font-face {
+            font-family: 'FPEFont';
+            src: url('assets/Barrio-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            min-height: 100svh;
+            background: #1f1f1f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'FPEFont', Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .paper {
+            position: relative;
+            width: min(95%, 1000px);
+            height: min(600px, calc(100svh - 40px));
+            min-height: 480px;
+            background-color: #ffffff;
+            overflow: hidden;
+            background-image:
+                linear-gradient(to right,
+                    transparent 13%,
+                    #d47d89 13%,
+                    #d47d89 13.3%,
+                    transparent 13.3%
+                ),
+                repeating-linear-gradient(to bottom,
+                    transparent 0px,
+                    transparent 30px,
+                    #70c7ef 31px,
+                    #70c7ef 32px
+                );
+        }
+
+        /* Logo */
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 6%;
+            width: clamp(75px, 11vw, 110px);
+            aspect-ratio: 1 / 1;
+            border: 7px solid #403747;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: white;
+            z-index: 4;
+            overflow: hidden;
+        }
+
+        .logo img {
+            width: 85%;
+            height: 85%;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* Konten Tengah Frame 6 */
+        .center-content {
+            position: absolute;
+            top: 52%;
+            left: 52%;
+            transform: translate(-50%, -50%);
+            width: 85%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: clamp(18px, 3vh, 28px);
+            z-index: 3;
+        }
+
+        /* Gambar Miss Circle Loaf Party */
+        .party-img {
+            width: clamp(150px, 24vw, 220px);
+            height: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* Teks Ucapan */
+        .birthday-text {
+            font-size: clamp(26px, 3.8vw, 40px);
+            font-weight: 400;
+            color: #000000;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        /* Baris Tombol Continue + "or" + Karakter Ikon */
+        .action-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(16px, 3vw, 28px);
+            margin-top: 5px;
+        }
+
+        .button {
+            width: clamp(220px, 36vw, 340px);
+            height: clamp(58px, 10vh, 78px);
+            border: none;
+            border-radius: 50px;
+            background: #403747;
+            color: white;
+            font-family: 'FPEFont', Arial, sans-serif;
+            font-size: clamp(22px, 3vw, 30px);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .button:hover {
+            background: #55495e;
+            transform: scale(1.04);
+        }
+
+        .or-text {
+            font-size: clamp(24px, 3.2vw, 34px);
+            color: #000000;
+        }
+
+        /* Ikon Karakter di Sebelah "or" */
+        .alt-choice-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            transition: transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .alt-choice-btn:hover {
+            transform: scale(1.12) rotate(5deg);
+        }
+
+        .alt-choice-btn img {
+            width: clamp(75px, 12vw, 115px);
+            height: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* Tablet */
+        @media (min-width: 601px) and (max-width: 900px) {
+            .paper {
+                width: 100%;
+                height: min(600px, calc(100svh - 30px));
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+            .paper {
+                width: 100%;
+                height: calc(100svh - 24px);
+                min-height: 500px;
+            }
+
+            .logo {
+                top: 15px;
+                left: 5%;
+                width: clamp(65px, 16vw, 85px);
+                border-width: 5px;
+            }
+
+            .center-content {
+                left: 50%;
+                width: 90%;
+                gap: 20px;
+            }
+
+            .action-row {
+                flex-wrap: wrap;
+                gap: 14px;
+            }
+
+            .button {
+                width: min(230px, 75vw);
+                height: 56px;
+                font-size: 22px;
+            }
+
+            .alt-choice-btn img {
+                width: 75px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="paper">
+        <div class="logo">
+            <img src="assets/fpe_logo.png" alt="FPE Logo">
+        </div>
+
+        <div class="center-content">
+            <img class="party-img" src="assets/fatty.jpeg" alt="Birthday Loaf">
+
+            <h1 class="birthday-text">happy birtday eve :3</h1>
+            <div class="action-row">
+                <button class="button" onclick="window.location.href='deenikfat4.html'">
+                    continue
+                </button>
+
+                <span class="or-text">or</span>
+
+                <button class="alt-choice-btn" title="Secret Choice" onclick="window.location.href='deenikfat5.html'">
+                    <img src="assets/3.png" alt="Loaf Option">
+                </button>
+            </div>
+        </div>
+
+        <!-- Audio latar belakang tetap lanjut dari halaman sebelumnya -->
+        <audio id="audio" src="assets/fpe_welcome.mp3"></audio>
+    </main>
+
+    <script>
+        // Melanjutkan musik latar secara otomatis jika diputar dari halaman 1/2
+        const audio = document.getElementById("audio");
+
+        const savedTime = localStorage.getItem("audioTime");
+        const savedVolume = localStorage.getItem("audioVolume");
+        const isPlaying = localStorage.getItem("audioPlaying") === "true";
+
+        if (savedVolume !== null) {
+            audio.volume = Number(savedVolume);
+        }
+
+        if (savedTime !== null) {
+            audio.currentTime = Number(savedTime);
+        }
+
+        if (isPlaying) {
+            audio.play().catch(err => console.log("Autoplay blocked:", err));
+        }
+
+        audio.addEventListener("timeupdate", () => {
+            if (audio.duration) {
+                localStorage.setItem("audioTime", audio.currentTime);
+            }
+        });
+
+        audio.addEventListener("ended", () => {
+            localStorage.setItem("audioPlaying", "false");
+        });
+    </script>
+
+</body>
+</html>

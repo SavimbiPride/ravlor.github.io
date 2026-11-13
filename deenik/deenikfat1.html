@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deenik</title>
+
+    <style>
+        @font-face {
+            font-family: 'FPEFont';
+            src: url('assets/Barrio-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            min-height: 100svh;
+            background: #1f1f1f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'FPEFont', Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .paper {
+            position: relative;
+            width: min(95%, 1000px);
+            height: min(600px, calc(100svh - 40px));
+            min-height: 480px;
+            background-color: #ffffff;
+            overflow: hidden;
+            background-image:
+                linear-gradient(to right,
+                    transparent 13%,
+                    #d47d89 13%,
+                    #d47d89 13.3%,
+                    transparent 13.3%),
+                repeating-linear-gradient(to bottom,
+                    transparent 0px,
+                    transparent 30px,
+                    #70c7ef 31px,
+                    #70c7ef 32px);
+        }
+
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 6%;
+            width: clamp(75px, 11vw, 110px);
+            aspect-ratio: 1 / 1;
+            border: 7px solid #403747;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: white;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .logo img {
+            width: 85%;
+            height: 85%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .main-content {
+            position: absolute;
+
+            top: 30%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            gap: clamp(30px, 5vh, 50px);
+        }
+
+        .main-content h1 {
+            font-size: clamp(28px, 4vw, 38px);
+            font-weight: 400;
+            color: black;
+            text-align: center;
+        }
+
+        .button {
+            width: min(420px, 100%);
+            height: clamp(65px, 12vh, 90px);
+            border: none;
+            border-radius: 50px;
+            background: #403747;
+            color: white;
+            font-family: 'FPEFont', Arial, sans-serif;
+            font-size: clamp(23px, 3.2vw, 32px);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .button:hover {
+            background: #55495e;
+            transform: scale(1.04);
+        }
+
+        .music-player {
+            position: absolute;
+
+            right: 0;
+            bottom: 0;
+
+            width: clamp(250px, 35%, 350px);
+            min-height: 190px;
+
+            background: #95aaa7;
+
+            border-radius: 35px 0 0 0;
+
+            padding: 15px 20px;
+        }
+
+        .music-title {
+            text-align: center;
+
+            font-size: clamp(16px, 2vw, 20px);
+            color: black;
+
+            margin-bottom: 20px;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .music-line {
+            width: 100%;
+            height: 5px;
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+            cursor: pointer;
+            overflow: hidden;
+            touch-action: none;
+        }
+
+        .music-progress {
+            width: 0%;
+            height: 100%;
+
+            background: #403747;
+            border-radius: 10px;
+
+            transition: width 0.1s linear;
+        }
+
+        .time-display {
+            display: flex;
+            justify-content: space-between;
+
+            font-size: 11px;
+            margin-top: 6px;
+
+            color: #29232d;
+        }
+
+        /* Controls */
+        .player-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            gap: 25px;
+            margin-top: 12px;
+        }
+
+        .player-controls button {
+            border: none;
+            background: transparent;
+
+            font-size: 23px;
+            color: #403747;
+
+            cursor: pointer;
+            transition: 0.2s;
+
+            padding: 5px;
+        }
+
+        .player-controls button:hover {
+            transform: scale(1.2);
+            color: white;
+        }
+
+        /* Volume */
+        .volume-control {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .volume-control span {
+            font-size: 15px;
+            color: #403747;
+        }
+
+        .volume-control input {
+            width: min(110px, 45%);
+            height: 5px;
+
+            accent-color: #403747;
+            cursor: pointer;
+        }
+
+        .volume-value {
+            font-size: 12px;
+            min-width: 35px;
+            text-align: right;
+        }
+
+        /* Tablet */
+        @media (min-width: 601px) and (max-width: 900px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .paper {
+                width: 100%;
+                height: min(600px, calc(100svh - 30px));
+            }
+
+            .main-content {
+                top: 32%;
+            }
+
+            .button {
+                width: min(380px, 100%);
+            }
+
+            .music-player {
+                width: 320px;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+
+            body {
+                padding: 12px;
+
+                align-items: center;
+            }
+
+            .paper {
+                width: 100%;
+
+                height: calc(100svh - 24px);
+                min-height: 520px;
+
+                background-image:
+                    linear-gradient(to right,
+                        transparent 13%,
+                        #d47d89 13%,
+                        #d47d89 13.5%,
+                        transparent 13.5%),
+                    repeating-linear-gradient(to bottom,
+                        transparent 0px,
+                        transparent 29px,
+                        #70c7ef 30px,
+                        #70c7ef 31px);
+            }
+
+            /* Logo */
+            .logo {
+                top: 15px;
+                left: 5%;
+
+                width: clamp(70px, 18vw, 90px);
+                border-width: 5px;
+            }
+
+            /* Main Content */
+            .main-content {
+                top: 32%;
+
+                width: 90%;
+                gap: 35px;
+            }
+
+            .main-content h1 {
+                font-size: clamp(27px, 8vw, 34px);
+            }
+
+            /* Button */
+            .button {
+                width: min(280px, 90%);
+                height: 65px;
+
+                font-size: 25px;
+            }
+
+            /* Music Player */
+            .music-player {
+                width: min(280px, 78%);
+                min-height: 180px;
+
+                padding: 15px;
+
+                border-radius: 28px 0 0 0;
+            }
+
+            .music-title {
+                font-size: 17px;
+                margin-bottom: 17px;
+            }
+
+            .player-controls {
+                gap: 30px;
+                margin-top: 10px;
+            }
+
+            .player-controls button {
+                font-size: 22px;
+                padding: 7px;
+            }
+
+            .volume-control {
+                margin-top: 10px;
+                gap: 8px;
+            }
+
+            .volume-control input {
+                width: 40%;
+            }
+        }
+
+        /* Small Mobile */
+        @media (max-width: 380px) {
+
+            .paper {
+                min-height: 500px;
+            }
+
+            .main-content {
+                top: 30%;
+                gap: 30px;
+            }
+
+            .button {
+                width: 230px;
+                height: 58px;
+                font-size: 22px;
+            }
+
+            .music-player {
+                width: 75%;
+                min-height: 175px;
+                padding: 13px;
+            }
+
+            .music-title {
+                font-size: 15px;
+            }
+
+            .logo {
+                width: 68px;
+                border-width: 5px;
+            }
+        }
+
+        /* Short Screen */
+        @media (max-height: 600px) and (min-width: 601px) {
+
+            body {
+                padding: 10px;
+            }
+
+            .paper {
+                height: calc(100svh - 20px);
+                min-height: 0;
+            }
+
+            .main-content {
+                top: 22%;
+                gap: 20px;
+            }
+
+            .music-player {
+                transform: scale(0.85);
+                transform-origin: bottom right;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="paper">
+
+        <div class="logo">
+            <img src="assets/fpe_logo.png" alt="FPE Logo">
+        </div>
+
+        <div class="main-content">
+
+            <h1>you fat</h1>
+            <button class="button" onclick="window.location.href='deenikfat2.html'">
+                hit me
+            </button>
+
+        </div>
+
+        <div class="music-player">
+
+            <p class="music-title" id="musicName">
+                music name
+            </p>
+
+            <div class="music-line" id="musicLine">
+                <div class="music-progress" id="musicProgress"></div>
+            </div>
+
+            <div class="time-display">
+                <span id="currentTime">0:00</span>
+                <span id="duration">0:00</span>
+            </div>
+
+            <div class="player-controls">
+
+                <button id="playBtn" title="Play / Pause">
+                    ▶
+                </button>
+
+                <button id="stopBtn" title="Stop">
+                    ■
+                </button>
+
+            </div>
+
+            <div class="volume-control">
+
+                <span>♪</span>
+
+                <input type="range" id="volumeSlider" min="0" max="100" value="100">
+
+                <span class="volume-value" id="volumeValue">
+                    100%
+                </span>
+
+            </div>
+
+            <audio id="audio" src="assets/fpe_welcome.mp3"></audio>
+
+        </div>
+
+    </main>
+
+    <script>
+        const audio = document.getElementById("audio");
+        const playBtn = document.getElementById("playBtn");
+        const stopBtn = document.getElementById("stopBtn");
+        const musicName = document.getElementById("musicName");
+        const musicLine = document.getElementById("musicLine");
+        const musicProgress = document.getElementById("musicProgress");
+        const currentTimeDisplay = document.getElementById("currentTime");
+        const durationDisplay = document.getElementById("duration");
+        const volumeSlider = document.getElementById("volumeSlider");
+        const volumeValue = document.getElementById("volumeValue");
+
+        musicName.textContent = "FPE - Welcome";
+
+        // Pulihkan state musik dari localStorage jika ada
+        const savedTime = localStorage.getItem("audioTime");
+        const savedVolume = localStorage.getItem("audioVolume");
+        const isPlaying = localStorage.getItem("audioPlaying") === "true";
+
+        if (savedVolume !== null) {
+            audio.volume = Number(savedVolume);
+            volumeSlider.value = Number(savedVolume) * 100;
+            volumeValue.textContent = `${Math.round(Number(savedVolume) * 100)}%`;
+        }
+
+        if (savedTime !== null) {
+            audio.currentTime = Number(savedTime);
+        }
+
+        if (isPlaying) {
+            audio.play().then(() => {
+                playBtn.textContent = "Ⅱ";
+            }).catch(err => console.log("Autoplay blocked:", err));
+        }
+
+        function formatTime(time) {
+            if (!Number.isFinite(time)) return "0:00";
+            const minutes = Math.floor(time / 60);
+            const seconds = Math.floor(time % 60);
+            return `${minutes}:${String(seconds).padStart(2, "0")}`;
+        }
+
+        // Simpan posisi waktu setiap kali lagu berjalan
+        audio.addEventListener("timeupdate", () => {
+            if (audio.duration) {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                musicProgress.style.width = `${progress}%`;
+                currentTimeDisplay.textContent = formatTime(audio.currentTime);
+
+                // Simpan ke localStorage agar halaman lain bisa baca
+                localStorage.setItem("audioTime", audio.currentTime);
+            }
+        });
+
+        playBtn.addEventListener("click", async () => {
+            if (audio.paused) {
+                try {
+                    await audio.play();
+                    playBtn.textContent = "Ⅱ";
+                    localStorage.setItem("audioPlaying", "true");
+                } catch (error) {
+                    console.error("Music playback failed:", error);
+                }
+            } else {
+                audio.pause();
+                playBtn.textContent = "▶";
+                localStorage.setItem("audioPlaying", "false");
+            }
+        });
+
+        stopBtn.addEventListener("click", () => {
+            audio.pause();
+            audio.currentTime = 0;
+            playBtn.textContent = "▶";
+            localStorage.setItem("audioTime", 0);
+            localStorage.setItem("audioPlaying", "false");
+        });
+
+        audio.addEventListener("loadedmetadata", () => {
+            durationDisplay.textContent = formatTime(audio.duration);
+        });
+
+        musicLine.addEventListener("pointerdown", (event) => {
+            if (!audio.duration) return;
+            const rect = musicLine.getBoundingClientRect();
+            const clickPosition = Math.max(0, Math.min(event.clientX - rect.left, rect.width));
+            const percentage = clickPosition / rect.width;
+            audio.currentTime = percentage * audio.duration;
+            localStorage.setItem("audioTime", audio.currentTime);
+        });
+
+        volumeSlider.addEventListener("input", () => {
+            const volume = Number(volumeSlider.value);
+            audio.volume = volume / 100;
+            volumeValue.textContent = `${volume}%`;
+            localStorage.setItem("audioVolume", audio.volume);
+        });
+
+        audio.addEventListener("ended", () => {
+            playBtn.textContent = "▶";
+            localStorage.setItem("audioPlaying", "false");
+        });
+
+        audio.addEventListener("play", () => {
+            playBtn.textContent = "Ⅱ";
+            localStorage.setItem("audioPlaying", "true");
+        });
+
+        audio.addEventListener("pause", () => {
+            playBtn.textContent = "▶";
+            localStorage.setItem("audioPlaying", "false");
+        });
+    </script>
+
+</body>
+
+</html>
