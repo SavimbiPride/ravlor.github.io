@@ -53,6 +53,17 @@
                 );
         }
 
+        /* Canvas Party Popper */
+        #confettiCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
         /* Logo */
         .logo {
             position: absolute;
@@ -97,6 +108,12 @@
             height: auto;
             object-fit: contain;
             display: block;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .party-img:hover {
+            transform: scale(1.06);
         }
 
         /* Teks Ucapan */
@@ -212,13 +229,16 @@
 
 <body>
 
-    <main class="paper">
+    <main class="paper" id="paper">
+        <!-- Canvas Efek Party Popper -->
+        <canvas id="confettiCanvas"></canvas>
+
         <div class="logo">
             <img src="assets/fpe_logo.png" alt="FPE Logo">
         </div>
 
         <div class="center-content">
-            <img class="party-img" src="assets/fatty.jpeg" alt="Birthday Loaf">
+            <img class="party-img" id="partyImg" src="assets/fatty.jpeg" alt="Birthday Loaf" title="Click for more party poppers!">
 
             <h1 class="birthday-text">happy birtday eve :3</h1>
             <div class="action-row">
@@ -239,7 +259,104 @@
     </main>
 
     <script>
-        // Melanjutkan musik latar secara otomatis jika diputar dari halaman 1/2
+        // --- EFEK PARTY POPPER (CONFETTI) ---
+        const canvas = document.getElementById("confettiCanvas");
+        const ctx = canvas.getContext("2d");
+        const paper = document.getElementById("paper");
+        const partyImg = document.getElementById("partyImg");
+
+        let particles = [];
+        const colors = ["#ff595e", "#ffca3a", "#8ac926", "#1982c4", "#6a4c93", "#d47d89", "#70c7ef"];
+
+        function resizeCanvas() {
+            canvas.width = paper.clientWidth;
+            canvas.height = paper.clientHeight;
+        }
+        window.addEventListener("resize", resizeCanvas);
+        resizeCanvas();
+
+        function firePartyPoppers() {
+            const count = 75; // Jumlah potongan confetti per sisi
+
+            // Popper dari pojok kiri bawah
+            for (let i = 0; i < count; i++) {
+                const angle = (-Math.PI / 4) + (Math.random() - 0.5) * 0.7;
+                const speed = 10 + Math.random() * 12;
+                particles.push({
+                    x: 20,
+                    y: canvas.height - 20,
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed,
+                    size: 6 + Math.random() * 6,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    rotation: Math.random() * 360,
+                    rotationSpeed: (Math.random() - 0.5) * 12,
+                    shape: Math.random() > 0.4 ? "rect" : "circle"
+                });
+            }
+
+            // Popper dari pojok kanan bawah
+            for (let i = 0; i < count; i++) {
+                const angle = (-3 * Math.PI / 4) + (Math.random() - 0.5) * 0.7;
+                const speed = 10 + Math.random() * 12;
+                particles.push({
+                    x: canvas.width - 20,
+                    y: canvas.height - 20,
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed,
+                    size: 6 + Math.random() * 6,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    rotation: Math.random() * 360,
+                    rotationSpeed: (Math.random() - 0.5) * 12,
+                    shape: Math.random() > 0.4 ? "rect" : "circle"
+                });
+            }
+        }
+
+        function animateConfetti() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += 0.35; // Gravitasi
+                p.vx *= 0.985; // Hambatan udara
+                p.rotation += p.rotationSpeed;
+
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate((p.rotation * Math.PI) / 180);
+                ctx.fillStyle = p.color;
+
+                if (p.shape === "rect") {
+                    ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+                } else {
+                    ctx.beginPath();
+                    ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.restore();
+
+                // Hapus partikel yang sudah jatuh keluar layar
+                if (p.y > canvas.height + 30) {
+                    particles.splice(i, 1);
+                }
+            }
+
+            requestAnimationFrame(animateConfetti);
+        }
+
+        // Jalankan animasi dan tembakkan party popper saat halaman dibuka
+        animateConfetti();
+        window.addEventListener("DOMContentLoaded", () => {
+            setTimeout(firePartyPoppers, 200);
+        });
+
+        // Klik gambar karakter untuk meledakkan party popper lagi
+        partyImg.addEventListener("click", firePartyPoppers);
+
+        // --- MELANJUTKAN MUSIK LATAR DARI HALAMAN SEBELUMNYA ---
         const audio = document.getElementById("audio");
 
         const savedTime = localStorage.getItem("audioTime");
